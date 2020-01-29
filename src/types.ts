@@ -10,3 +10,8 @@ export interface DataFilters {
   campaigns: string[];
   datasources: string[];
 }
+
+export interface SelectOption {
+  value: string;
+  label: string;
+}

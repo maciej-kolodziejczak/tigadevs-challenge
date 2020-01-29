@@ -6,6 +6,8 @@ import { DataRecord, DataFilters } from "./types";
 import { Chart } from "./Chart/Chart";
 import { Filters } from "./Filters/Filters";
 
+import { lowercaseObjKeys } from "./utils";
+
 const { useState, useEffect } = React;
 
 export function App() {
@@ -17,11 +19,7 @@ export function App() {
 
   useEffect(() => {
     async function fetchData() {
-      const data = (await d3.csv("/data.csv")).map(d => {
-        return Object.fromEntries(
-          Object.entries(d).map(([k, v]) => [k.toLowerCase(), v])
-        );
-      });
+      const data = (await d3.csv("/data.csv")).map(lowercaseObjKeys);
       setData((data as unknown) as DataRecord[]);
     }
 
@@ -31,6 +29,8 @@ export function App() {
   return (
     <div
       style={{
+        width: 1360,
+        margin: "0 auto",
         display: "flex",
         justifyContent: "center"
       }}

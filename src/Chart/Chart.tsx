@@ -21,12 +21,17 @@ export function Chart({ data, filters }: ChartProps) {
     );
   });
 
+  const campaignsStr = filters.campaigns.length ? filters.campaigns.join(', ') : 'all';
+  const datasourcesStr = filters.datasources.length ? filters.datasources.join(', ') : 'all';
+
   return (
     <div
       style={{
+        width: 1020,
         padding: "10px 20px"
       }}
     >
+      <p>Metrics for {campaignsStr} campaigns and {datasourcesStr} datasources.</p>
       <div>
         <LineChart data={filteredData} />
       </div>
